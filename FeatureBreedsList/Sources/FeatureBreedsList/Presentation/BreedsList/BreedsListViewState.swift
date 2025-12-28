@@ -11,7 +11,7 @@ struct BreedsListViewState {
 
     enum Content: Equatable {
         case loading(String)
-        case loaded([Item], searchText: String, isLoadingMore: Bool = false)
+        case loaded([Item], searchText: String, searchPlaceholder: String, emptyMessage: String, isLoadingMore: Bool = false)
         case error(String, retryText: String)
     }
 

@@ -29,8 +29,8 @@ struct BreedDetailScreen: View {
         switch state.content {
         case .loading(let message):
             LoadingView(message: message)
-        case .loaded(let breed):
-            loadedContent(breed: breed)
+        case .loaded(let detail):
+            loadedContent(detail: detail)
         case .error(let message, let retryText):
             ErrorView(
                 message: message,
@@ -40,15 +40,20 @@ struct BreedDetailScreen: View {
         }
     }
 
-    private func loadedContent(breed: BreedDetailViewState.Breed) -> some View {
+    private func loadedContent(detail: BreedDetailViewState.Detail) -> some View {
         ScrollView {
             VStack(spacing: 24) {
-                breedImage(url: breed.imageUrl)
+                ImageView(
+                    imageUrl: detail.imageUrl,
+                    maxWidth: 300,
+                    cornerRadius: 16
+                )
+                    .padding(.horizontal)
 
                 VStack(alignment: .leading, spacing: 20) {
-                    infoSection(title: "Origin", content: breed.origin)
-                    infoSection(title: "Temperament", content: breed.temperament)
-                    infoSection(title: "Description", content: breed.description)
+                    infoSection(title: detail.sectionOriginTitle, content: detail.origin)
+                    infoSection(title: detail.sectionTemperamentTitle, content: detail.temperament)
+                    infoSection(title: detail.sectionDescriptionTitle, content: detail.description)
                 }
                 .padding(.horizontal)
 
@@ -56,31 +61,18 @@ struct BreedDetailScreen: View {
             }
             .padding(.top)
         }
-        .navigationTitle(breed.name)
+        .navigationTitle(detail.name)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     onToggleFavourite()
                 } label: {
-                    Image(systemName: breed.isFavourite ? "star.fill" : "star")
-                        .foregroundStyle(breed.isFavourite ? .yellow : .gray)
+                    Image(systemName: detail.isFavourite ? "star.fill" : "star")
+                        .foregroundStyle(detail.isFavourite ? .yellow : .gray)
                 }
             }
         }
-    }
-
-    private func breedImage(url: String?) -> some View {
-        RoundedRectangle(cornerRadius: 16)
-            .fill(Color.gray.opacity(0.2))
-            .aspectRatio(1, contentMode: .fit)
-            .frame(maxWidth: 300)
-            .overlay {
-                Image(systemName: "photo")
-                    .font(.system(size: 60))
-                    .foregroundStyle(.secondary)
-            }
-            .padding(.horizontal)
     }
 
     private func infoSection(title: String, content: String) -> some View {
@@ -92,6 +84,48 @@ struct BreedDetailScreen: View {
                 .font(.body)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+struct ImageView: View {
+    let imageUrl: String?
+    let maxWidth: CGFloat
+    let cornerRadius: CGFloat
+
+    var body: some View {
+        AsyncImage(url: imageUrl.flatMap { URL(string: $0) }) { phase in
+            switch phase {
+            case .empty:
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(Color.gray.opacity(0.2))
+                    .aspectRatio(1, contentMode: .fit)
+                    .frame(maxWidth: maxWidth)
+                    .overlay {
+                        ProgressView()
+                    }
+            case .success(let image):
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: maxWidth, height: maxWidth)
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+            case .failure:
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(Color.gray.opacity(0.2))
+                    .aspectRatio(1, contentMode: .fit)
+                    .frame(maxWidth: maxWidth)
+                    .overlay {
+                        Image(systemName: "photo")
+                            .font(.system(size: 60))
+                            .foregroundStyle(.secondary)
+                    }
+            @unknown default:
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(Color.gray.opacity(0.2))
+                    .aspectRatio(1, contentMode: .fit)
+                    .frame(maxWidth: maxWidth)
+            }
+        }
     }
 }
 
@@ -110,14 +144,17 @@ struct BreedDetailScreen: View {
         BreedDetailScreen(
             state: BreedDetailViewState(
                 content: .loaded(
-                    BreedDetailViewState.Breed(
+                    BreedDetailViewState.Detail(
                         id: "1",
                         name: "Abyssinian",
                         origin: "Egypt",
                         temperament: "Active, Energetic, Independent, Intelligent, Gentle",
                         description: "The Abyssinian is easy to care for, and a joy to have in your home. They're affectionate cats and love both people and other animals.",
                         imageUrl: nil,
-                        isFavourite: false
+                        isFavourite: false,
+                        sectionOriginTitle: "Origin",
+                        sectionTemperamentTitle: "Temperament",
+                        sectionDescriptionTitle: "Description"
                     )
                 )
             ),
@@ -132,14 +169,17 @@ struct BreedDetailScreen: View {
         BreedDetailScreen(
             state: BreedDetailViewState(
                 content: .loaded(
-                    BreedDetailViewState.Breed(
+                    BreedDetailViewState.Detail(
                         id: "2",
                         name: "Persian",
                         origin: "Iran (Persia)",
                         temperament: "Affectionate, loyal, Sedate, Quiet",
                         description: "The Persian is a long-haired breed of cat characterized by its round face and short muzzle. It is also known as the Persian Longhair.",
                         imageUrl: nil,
-                        isFavourite: true
+                        isFavourite: true,
+                        sectionOriginTitle: "Origin",
+                        sectionTemperamentTitle: "Temperament",
+                        sectionDescriptionTitle: "Description"
                     )
                 )
             ),

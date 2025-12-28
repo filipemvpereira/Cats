@@ -15,14 +15,18 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/Swinject/Swinject.git", from: "2.10.0"),
-        .package(path: "../CoreUI")
+        .package(path: "../CoreUI"),
+        .package(path: "../CoreBreeds"),
+        .package(path: "../CoreResources")
     ],
     targets: [
         .target(
             name: "FeatureBreedsList",
             dependencies: [
                 "Swinject",
-                "CoreUI"
+                "CoreUI",
+                "CoreBreeds",
+                "CoreResources"
             ]
         )
     ]

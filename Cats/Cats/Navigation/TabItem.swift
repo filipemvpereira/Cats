@@ -3,16 +3,18 @@
 //  Cats
 //
 
+import CoreResources
+
 enum TabItem: Int, CaseIterable {
     case breeds
     case favourites
 
-    var title: String {
+    func title(localizer: LocalizedResourcesRepository) -> String {
         switch self {
         case .breeds:
-            return "Cat List"
+            return localizer.getString(.tabBreeds)
         case .favourites:
-            return "Favourites"
+            return localizer.getString(.tabFavourites)
         }
     }
 

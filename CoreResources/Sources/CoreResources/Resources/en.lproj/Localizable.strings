@@ -1,0 +1,27 @@
+/* Breeds List */
+"breeds_list.title" = "Cat Breeds";
+"breeds_list.loading" = "Loading breeds...";
+"breeds_list.error.message" = "Failed to load breeds. Please check your connection and try again.";
+"breeds_list.error.retry" = "Retry";
+"breeds_list.search.placeholder" = "Search breeds";
+"breeds_list.empty.message" = "No breeds found";
+
+/* Breed Detail */
+"breed_detail.loading" = "Loading breed details...";
+"breed_detail.error.message" = "Failed to load breed details. Please check your connection and try again.";
+"breed_detail.error.retry" = "Try Again";
+"breed_detail.section.origin" = "Origin";
+"breed_detail.section.temperament" = "Temperament";
+"breed_detail.section.description" = "Description";
+
+/* Favourites */
+"favourites.title" = "Favourites";
+
+/* Tab Bar */
+"tab.breeds" = "Cat List";
+"tab.favourites" = "Favourites";
+
+/* Common */
+"common.loading" = "Loading...";
+"common.error" = "Error";
+"common.retry" = "Retry";

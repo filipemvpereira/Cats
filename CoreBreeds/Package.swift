@@ -3,30 +3,26 @@
 import PackageDescription
 
 let package = Package(
-    name: "FeatureBreedDetail",
+    name: "CoreBreeds",
     platforms: [
         .iOS(.v18)
     ],
     products: [
         .library(
-            name: "FeatureBreedDetail",
-            targets: ["FeatureBreedDetail"]
+            name: "CoreBreeds",
+            targets: ["CoreBreeds"]
         ),
     ],
     dependencies: [
         .package(url: "https://github.com/Swinject/Swinject.git", from: "2.10.0"),
-        .package(path: "../CoreUI"),
-        .package(path: "../CoreBreeds"),
-        .package(path: "../CoreResources")
+        .package(path: "../Network")
     ],
     targets: [
         .target(
-            name: "FeatureBreedDetail",
+            name: "CoreBreeds",
             dependencies: [
                 "Swinject",
-                "CoreUI",
-                "CoreBreeds",
-                "CoreResources"
+                "Network"
             ]
         )
     ]

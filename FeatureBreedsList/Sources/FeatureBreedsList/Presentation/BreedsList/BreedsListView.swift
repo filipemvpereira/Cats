@@ -3,6 +3,7 @@
 //  FeatureBreedsList
 //
 
+import CoreResources
 import CoreUI
 import SwiftUI
 
@@ -11,11 +12,22 @@ public struct BreedsListView: View {
     @StateObject var viewModel: BreedsListViewModel
     @State private var searchText: String = ""
 
+    private let navigator: any Navigator
+
+    init(viewModel: BreedsListViewModel, navigator: any Navigator) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+        self.navigator = navigator
+    }
+
     public var body: some View {
         BreedsListScreen(
             state: viewModel.state,
-            onBreedTap: { _ in },
-            onFavouriteTap: { _ in },
+            onBreedTap: { breedId in
+                navigator.navigate(to: .breedDetail(id: breedId))
+            },
+            onFavouriteTap: { breedId in
+                viewModel.toggleFavourite(breedId: breedId)
+            },
             onRetry: {
                 Task {
                     await viewModel.retry()
@@ -25,12 +37,14 @@ public struct BreedsListView: View {
                 await viewModel.loadMore()
             }
         )
-        .searchable(text: $searchText, prompt: "Search breeds")
+        .searchable(text: $searchText, prompt: searchPlaceholder)
         .onChange(of: searchText) { _, newValue in
-            viewModel.search(query: newValue)
+            Task {
+                await viewModel.search(query: newValue)
+            }
         }
         .onChange(of: viewModel.state.content) { _, newContent in
-            if case .loaded(_, let stateSearchText, _) = newContent {
+            if case .loaded(_, let stateSearchText, _, _, _) = newContent {
                 searchText = stateSearchText
             }
         }
@@ -40,6 +54,13 @@ public struct BreedsListView: View {
         .refreshable {
             await viewModel.refresh()
         }
+    }
+
+    private var searchPlaceholder: String {
+        if case .loaded(_, _, let placeholder, _, _) = viewModel.state.content {
+            return placeholder
+        }
+        return ""
     }
 }
 
@@ -62,8 +83,12 @@ struct BreedsListScreen: View {
         case .loading(let message):
             LoadingView(message: message)
 
-        case .loaded(let items, _, let isLoadingMore):
-            breedsList(items: items, isLoadingMore: isLoadingMore)
+        case .loaded(let items, _, _, let emptyMessage, let isLoadingMore):
+            if items.isEmpty {
+                BreedsListEmptyView(emptyMessage: emptyMessage)
+            } else {
+                breedsList(items: items, isLoadingMore: isLoadingMore)
+            }
 
         case .error(let message, let retryText):
             ErrorView(message: message, retryText: retryText, onRetry: onRetry)
@@ -85,14 +110,7 @@ struct BreedsListScreen: View {
                         Button {
                             onBreedTap(item.id)
                         } label: {
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.gray.opacity(0.2))
-                                .aspectRatio(1, contentMode: .fit)
-                                .overlay(
-                                    Image(systemName: "photo")
-                                        .font(.largeTitle)
-                                        .foregroundStyle(.gray)
-                                )
+                            ImageView(imageUrl: item.imageUrl, cornerRadius: 12)
                                 .overlay(alignment: .topTrailing) {
                                     Button {
                                         onFavouriteTap(item.id)
@@ -145,6 +163,66 @@ struct BreedsListScreen: View {
         }
     }
 
+}
+
+struct ImageView: View {
+    let imageUrl: String?
+    let cornerRadius: CGFloat
+
+    var body: some View {
+        AsyncImage(url: imageUrl.flatMap { URL(string: $0) }) { phase in
+            switch phase {
+            case .empty:
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(Color.gray.opacity(0.2))
+                    .aspectRatio(1, contentMode: .fit)
+                    .overlay {
+                        ProgressView()
+                    }
+            case .success(let image):
+                GeometryReader { geometry in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: geometry.size.width, height: geometry.size.width)
+                        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+                }
+                .aspectRatio(1, contentMode: .fit)
+            case .failure:
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(Color.gray.opacity(0.2))
+                    .aspectRatio(1, contentMode: .fit)
+                    .overlay {
+                        Image(systemName: "photo")
+                            .font(.largeTitle)
+                            .foregroundStyle(.gray)
+                    }
+            @unknown default:
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(Color.gray.opacity(0.2))
+                    .aspectRatio(1, contentMode: .fit)
+            }
+        }
+    }
+}
+
+struct BreedsListEmptyView: View {
+    let emptyMessage: String
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "tray")
+                .font(.system(size: 60))
+                .foregroundStyle(.gray)
+
+            Text(emptyMessage)
+                .font(.headline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
 }
 
 #Preview("Loading") {
@@ -210,7 +288,9 @@ struct BreedsListScreen: View {
                             isFavourite: true
                         )
                     ],
-                    searchText: ""
+                    searchText: "",
+                    searchPlaceholder: "Search breeds",
+                    emptyMessage: "No breeds found"
                 )
             ),
             onBreedTap: { _ in },
@@ -276,7 +356,29 @@ struct BreedsListScreen: View {
                         )
                     ],
                     searchText: "",
+                    searchPlaceholder: "Search breeds",
+                    emptyMessage: "No breeds found",
                     isLoadingMore: true
+                )
+            ),
+            onBreedTap: { _ in },
+            onFavouriteTap: { _ in },
+            onRetry: {},
+            onLoadMore: {}
+        )
+    }
+}
+
+#Preview("Empty") {
+    NavigationStack {
+        BreedsListScreen(
+            state: BreedsListViewState(
+                title: "Cat Breeds",
+                content: .loaded(
+                    [],
+                    searchText: "",
+                    searchPlaceholder: "Search breeds",
+                    emptyMessage: "No breeds found"
                 )
             ),
             onBreedTap: { _ in },

@@ -33,10 +33,10 @@ final class AppNavigator: Navigator {
             AppDI.breedsListView(navigator: self)
 
         case .favourites:
-            AppDI.favouritesView(navigator: self)
+            AppDI.favouritesView()
 
         case .breedDetail(let id):
-            AppDI.breedDetailView(id: id, navigator: self)
+            AppDI.breedDetailView(id: id)
         }
     }
 }

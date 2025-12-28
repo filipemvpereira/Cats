@@ -3,6 +3,7 @@
 //  Cats
 //
 
+import CoreResources
 import CoreUI
 import SwiftUI
 
@@ -10,13 +11,14 @@ struct AppCoordinatorView: View {
 
     @StateObject private var navigator = AppNavigator()
     @State private var selectedTab: TabItem = .breeds
+    private let localizer = AppDI.localizer()
 
     var body: some View {
         TabView(selection: $selectedTab) {
             ForEach(TabItem.allCases, id: \.self) { tab in
                 tabContent(for: tab)
                     .tabItem {
-                        Label(tab.title, systemImage: tab.icon)
+                        Label(tab.title(localizer: localizer), systemImage: tab.icon)
                     }
                     .tag(tab)
             }
@@ -29,6 +31,7 @@ struct AppCoordinatorView: View {
             rootView(for: tab)
                 .navigationDestination(for: AppRoute.self) { route in
                     navigator.build(route: route)
+                        .toolbar(.hidden, for: .tabBar)
                 }
         }
     }

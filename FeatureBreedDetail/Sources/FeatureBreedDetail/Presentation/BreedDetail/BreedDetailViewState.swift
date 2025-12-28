@@ -10,11 +10,11 @@ struct BreedDetailViewState {
 
     enum Content {
         case loading(String)
-        case loaded(Breed)
+        case loaded(Detail)
         case error(String, retryText: String)
     }
 
-    struct Breed {
+    struct Detail {
         let id: String
         let name: String
         let origin: String
@@ -22,5 +22,8 @@ struct BreedDetailViewState {
         let description: String
         let imageUrl: String?
         let isFavourite: Bool
+        let sectionOriginTitle: String
+        let sectionTemperamentTitle: String
+        let sectionDescriptionTitle: String
     }
 }
