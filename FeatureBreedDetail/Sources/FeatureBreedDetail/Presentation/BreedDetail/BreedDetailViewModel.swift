@@ -49,9 +49,9 @@ class BreedDetailViewModel: ObservableObject {
     func toggleFavourite() {
         Task {
             do {
-                try await toggleFavouriteUseCase.execute(breedId: breedId)
-
                 if case .loaded(let detail) = state.content {
+                    try await toggleFavouriteUseCase.execute(breedId: detail.id)
+
                     state = BreedDetailViewState(
                         content: .loaded(
                             BreedDetailViewState.Detail(

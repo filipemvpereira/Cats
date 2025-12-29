@@ -19,10 +19,6 @@ final class GetFavouritesUseCaseImpl: GetFavouritesUseCase {
     }
 
     func execute() async throws -> [Breed] {
-        // Get all breeds with large limit to fetch all at once //TODO LIPE
-        let allBreeds = try await repository.getBreeds(page: 0, limit: 100)
-
-        // Filter only favourites
-        return allBreeds.filter { $0.isFavourite }
+        try await repository.getFavoriteBreeds()
     }
 }

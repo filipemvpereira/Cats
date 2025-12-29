@@ -3,9 +3,10 @@
 //  CoreBreeds
 //
 
+import CoreLocalStorage
 import Foundation
-import Swinject
 import Network
+import Swinject
 
 public final class CoreBreedsAssembly: Assembly {
 
@@ -28,7 +29,8 @@ public final class CoreBreedsAssembly: Assembly {
             return BreedRepositoryImpl(
                 networkService: resolver.resolve(NetworkService.self)!,
                 configuration: resolver.resolve(CoreBreedsConfiguration.self)!,
-                decoder: resolver.resolve(JSONDecoder.self)!
+                decoder: resolver.resolve(JSONDecoder.self)!,
+                localStorage: resolver.resolve(LocalStorageRepository.self)!
             )
         }.inObjectScope(.container)
     }

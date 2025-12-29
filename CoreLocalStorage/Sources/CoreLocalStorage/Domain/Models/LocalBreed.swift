@@ -1,18 +1,19 @@
 //
-//  Breed.swift
-//  CoreBreeds
+//  LocalBreed.swift
+//  CoreLocalStorage
 //
 
 import Foundation
 
-public struct Breed: Identifiable, Equatable, Sendable {
+public struct LocalBreed: Identifiable, Equatable, Sendable {
     public let id: String
     public let name: String
     public let origin: String
     public let temperament: String
     public let description: String
     public let imageUrl: String?
-    public let isFavourite: Bool
+    public let isFavorite: Bool
+    public let lastUpdated: Date
 
     public init(
         id: String,
@@ -21,7 +22,8 @@ public struct Breed: Identifiable, Equatable, Sendable {
         temperament: String,
         description: String,
         imageUrl: String?,
-        isFavourite: Bool
+        isFavorite: Bool,
+        lastUpdated: Date = Date()
     ) {
         self.id = id
         self.name = name
@@ -29,6 +31,7 @@ public struct Breed: Identifiable, Equatable, Sendable {
         self.temperament = temperament
         self.description = description
         self.imageUrl = imageUrl
-        self.isFavourite = isFavourite
+        self.isFavorite = isFavorite
+        self.lastUpdated = lastUpdated
     }
 }

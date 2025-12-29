@@ -4,6 +4,7 @@
 //
 
 import CoreBreeds
+import CoreLocalStorage
 import CoreResources
 import CoreUI
 import FeatureBreedDetail
@@ -24,6 +25,7 @@ class AppDI {
     static func setup() {
         shared.assembler = Assembler([
             NetworkAssembly(),
+            CoreLocalStorageAssembly(),
             CoreResourcesAssembly(),
             CoreBreedsAssembly(
                 configuration: CoreBreedsConfiguration(

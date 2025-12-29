@@ -19,6 +19,7 @@ final class ToggleFavouriteUseCaseImpl: ToggleFavouriteUseCase {
     }
 
     func execute(breedId: String) async throws {
-        try await repository.toggleFavourite(breedId: breedId)
+        let breed = try await repository.getBreedDetail(id: breedId)
+        try await repository.setFavorite(breedId: breedId, isFavorite: !breed.isFavourite)
     }
 }

@@ -24,7 +24,6 @@ class BreedsListViewModel: ObservableObject {
     private let pageLimit: Int = 20
     private var canLoadMore: Bool = true
     private var loadedBreeds: [CoreBreeds.Breed] = []
-    private var hasInitialized: Bool = false
 
     nonisolated init(
         getBreedsUseCase: GetBreedsUseCase,
@@ -37,8 +36,6 @@ class BreedsListViewModel: ObservableObject {
     }
 
     func initialize() async {
-        guard !hasInitialized else { return }
-
         state = BreedsListViewState(
             title: localizer.getString(.breedsListTitle),
             content: .loading(localizer.getString(.breedsListLoading))
@@ -48,7 +45,6 @@ class BreedsListViewModel: ObservableObject {
         canLoadMore = true
         loadedBreeds = []
         await loadBreeds()
-        hasInitialized = true
     }
 
     func refresh() async {
@@ -153,7 +149,6 @@ class BreedsListViewModel: ObservableObject {
                 )
                 loadedBreeds[index] = updatedBreed
 
-                // Update state with modified list
                 guard case .loaded(_, let searchText, let searchPlaceholder, let emptyMessage, let isLoadingMore) = state.content else {
                     return
                 }

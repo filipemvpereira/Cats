@@ -19,8 +19,9 @@ final class UnfavouriteUseCaseImpl: UnfavouriteUseCase {
     }
 
     func execute(breedId: String) async throws {
-        //TODO LIPE
-        // On favorites screen, we only remove favorites (toggle to false)
-        try await repository.toggleFavourite(breedId: breedId)
+        let breed = try await repository.getBreedDetail(id: breedId)
+        if breed.isFavourite {
+            try await repository.setFavorite(breedId: breedId, isFavorite: false)
+        }
     }
 }
