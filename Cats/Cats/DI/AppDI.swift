@@ -8,6 +8,7 @@ import CoreResources
 import CoreUI
 import FeatureBreedDetail
 import FeatureBreedsList
+import FeatureFavourites
 import Network
 import Swinject
 import SwiftUI
@@ -30,7 +31,8 @@ class AppDI {
                 )
             ),
             BreedsListAssembly(),
-            BreedDetailAssembly()
+            BreedDetailAssembly(),
+            FavouritesAssembly()
         ])
     }
 
@@ -40,9 +42,8 @@ class AppDI {
     }
 
     @MainActor
-    static func favouritesView() -> some View {
-        Text("Favourites Feature")
-            .navigationTitle("Favourites")
+    static func favouritesView(navigator: any Navigator) -> FavouritesView {
+        shared.assembler.resolver.resolve(FavouritesView.self, argument: navigator)!
     }
 
     @MainActor

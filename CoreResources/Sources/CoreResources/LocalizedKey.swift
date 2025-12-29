@@ -24,6 +24,10 @@ public enum LocalizedKey {
 
     // Favourites
     case favouritesTitle
+    case favouritesLoading
+    case favouritesEmptyMessage
+    case favouritesErrorMessage
+    case favouritesErrorRetry
 
     // Tab Bar
     case tabBreeds
@@ -49,6 +53,10 @@ public enum LocalizedKey {
 
         // Favourites
         case .favouritesTitle: return "favourites.title"
+        case .favouritesLoading: return "favourites.loading"
+        case .favouritesEmptyMessage: return "favourites.empty.message"
+        case .favouritesErrorMessage: return "favourites.error.message"
+        case .favouritesErrorRetry: return "favourites.error.retry"
 
         // Tab Bar
         case .tabBreeds: return "tab.breeds"

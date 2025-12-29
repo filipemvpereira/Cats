@@ -16,6 +16,10 @@
 
 /* Favourites */
 "favourites.title" = "Favourites";
+"favourites.loading" = "Loading favourites...";
+"favourites.empty.message" = "No favourites yet.\nTap the star on breeds to add them here.";
+"favourites.error.message" = "Failed to load favourites. Please try again.";
+"favourites.error.retry" = "Retry";
 
 /* Tab Bar */
 "tab.breeds" = "Cat List";

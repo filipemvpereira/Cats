@@ -14,7 +14,7 @@ public struct Breed: Identifiable, Equatable {
     public let imageUrl: String?
     public let isFavourite: Bool
 
-    init(
+    public init(
         id: String,
         name: String,
         origin: String,

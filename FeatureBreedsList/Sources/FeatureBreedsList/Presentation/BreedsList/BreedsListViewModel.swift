@@ -136,9 +136,40 @@ class BreedsListViewModel: ObservableObject {
         Task {
             do {
                 try await toggleFavouriteUseCase.execute(breedId: breedId)
-                await refresh()
+
+                guard let index = loadedBreeds.firstIndex(where: { $0.id == breedId }) else {
+                    return
+                }
+
+                let breed = loadedBreeds[index]
+                let updatedBreed = CoreBreeds.Breed(
+                    id: breed.id,
+                    name: breed.name,
+                    origin: breed.origin,
+                    temperament: breed.temperament,
+                    description: breed.description,
+                    imageUrl: breed.imageUrl,
+                    isFavourite: !breed.isFavourite
+                )
+                loadedBreeds[index] = updatedBreed
+
+                // Update state with modified list
+                guard case .loaded(_, let searchText, let searchPlaceholder, let emptyMessage, let isLoadingMore) = state.content else {
+                    return
+                }
+
+                state = BreedsListViewState(
+                    title: state.title,
+                    content: .loaded(
+                        loadedBreeds.map(mapToViewStateItem),
+                        searchText: searchText,
+                        searchPlaceholder: searchPlaceholder,
+                        emptyMessage: emptyMessage,
+                        isLoadingMore: isLoadingMore
+                    )
+                )
             } catch {
-                // TODO: Handle error
+                // Silently fail for toggle - could add error handling if needed
             }
         }
     }

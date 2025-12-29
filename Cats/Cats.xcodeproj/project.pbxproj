@@ -10,6 +10,7 @@
 		0E6BB1272EFEDE6500A43E26 /* CoreUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0E6BB1262EFEDE6500A43E26 /* CoreUI */; };
 		0E6BB12A2EFEE0AF00A43E26 /* FeatureBreedsList in Frameworks */ = {isa = PBXBuildFile; productRef = 0E6BB1292EFEE0AF00A43E26 /* FeatureBreedsList */; };
 		0E6BB13D2EFEF04A00A43E26 /* FeatureBreedDetail in Frameworks */ = {isa = PBXBuildFile; productRef = 0E6BB13C2EFEF04A00A43E26 /* FeatureBreedDetail */; };
+		0E6BB1402F02D72200A43E26 /* FeatureFavourites in Frameworks */ = {isa = PBXBuildFile; productRef = 0E6BB13F2F02D72200A43E26 /* FeatureFavourites */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E6BB12A2EFEE0AF00A43E26 /* FeatureBreedsList in Frameworks */,
+				0E6BB1402F02D72200A43E26 /* FeatureFavourites in Frameworks */,
 				0E6BB13D2EFEF04A00A43E26 /* FeatureBreedDetail in Frameworks */,
 				0E6BB1272EFEDE6500A43E26 /* CoreUI in Frameworks */,
 			);
@@ -77,6 +79,7 @@
 				0E6BB1262EFEDE6500A43E26 /* CoreUI */,
 				0E6BB1292EFEE0AF00A43E26 /* FeatureBreedsList */,
 				0E6BB13C2EFEF04A00A43E26 /* FeatureBreedDetail */,
+				0E6BB13F2F02D72200A43E26 /* FeatureFavourites */,
 			);
 			productName = Cats;
 			productReference = 0E6BB0FF2EFEDD4500A43E26 /* Cats.app */;
@@ -110,6 +113,7 @@
 				0E6BB1252EFEDE6500A43E26 /* XCLocalSwiftPackageReference "../CoreUI" */,
 				0E6BB1282EFEE0AF00A43E26 /* XCLocalSwiftPackageReference "../FeatureBreedsList" */,
 				0E6BB13B2EFEF04A00A43E26 /* XCLocalSwiftPackageReference "../FeatureBreedDetail" */,
+				0E6BB13E2F02D72200A43E26 /* XCLocalSwiftPackageReference "../FeatureFavourites" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0E6BB1002EFEDD4500A43E26 /* Products */;
@@ -268,6 +272,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AAWMBJF5PF;
@@ -285,6 +290,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.filipepereira.Cats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -304,6 +310,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AAWMBJF5PF;
@@ -321,6 +328,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.filipepereira.Cats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -371,6 +379,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../FeatureBreedDetail;
 		};
+		0E6BB13E2F02D72200A43E26 /* XCLocalSwiftPackageReference "../FeatureFavourites" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../FeatureFavourites;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -385,6 +397,10 @@
 		0E6BB13C2EFEF04A00A43E26 /* FeatureBreedDetail */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FeatureBreedDetail;
+		};
+		0E6BB13F2F02D72200A43E26 /* FeatureFavourites */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FeatureFavourites;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
