@@ -60,7 +60,6 @@ final class NetworkServiceImpl: NetworkService {
         }
     }
 
-    //TODO LIPE
     private func logRequest(_ request: URLRequest) {
         print("\n[Network] 🚀 Request")
         print("URL: \(request.url?.absoluteString ?? "N/A")")
@@ -76,7 +75,6 @@ final class NetworkServiceImpl: NetworkService {
         print("")
     }
 
-    //TODO LIPE
     private func logResponse(_ response: HTTPURLResponse, data: Data) {
         print("\n[Network] ✅ Response")
         print("URL: \(response.url?.absoluteString ?? "N/A")")

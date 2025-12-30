@@ -17,7 +17,8 @@ let package = Package(
         .package(url: "https://github.com/Swinject/Swinject.git", from: "2.10.0"),
         .package(path: "../CoreUI"),
         .package(path: "../CoreBreeds"),
-        .package(path: "../CoreResources")
+        .package(path: "../CoreResources"),
+        .package(path: "../CoreTests")
     ],
     targets: [
         .target(
@@ -28,6 +29,10 @@ let package = Package(
                 "CoreBreeds",
                 "CoreResources"
             ]
+        ),
+        .testTarget(
+            name: "FeatureBreedsListTests",
+            dependencies: ["FeatureBreedsList", "CoreBreeds", "CoreResources", "CoreTests"]
         )
     ]
 )

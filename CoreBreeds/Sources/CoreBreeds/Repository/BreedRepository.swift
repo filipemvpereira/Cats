@@ -15,14 +15,14 @@ public protocol BreedRepository {
     func getFavoriteBreeds() async throws -> [Breed]
 }
 
-final class BreedRepositoryImpl: BreedRepository {
+public final class BreedRepositoryImpl: BreedRepository {
 
     nonisolated(unsafe) private let networkService: NetworkService
     nonisolated(unsafe) private let configuration: CoreBreedsConfiguration
     nonisolated(unsafe) private let decoder: JSONDecoder
     nonisolated(unsafe) private let localStorage: LocalStorageRepository
 
-    nonisolated init(
+    public nonisolated init(
         networkService: NetworkService,
         configuration: CoreBreedsConfiguration,
         decoder: JSONDecoder,
@@ -34,7 +34,7 @@ final class BreedRepositoryImpl: BreedRepository {
         self.localStorage = localStorage
     }
 
-    func getBreeds(page: Int, limit: Int) async throws -> [Breed] {
+    public func getBreeds(page: Int, limit: Int) async throws -> [Breed] {
         do {
             let url = configuration.breedsURL(limit: limit, page: page)
             let request = NetworkRequest(method: .get, url: url)
@@ -52,7 +52,7 @@ final class BreedRepositoryImpl: BreedRepository {
         }
     }
 
-    func searchBreeds(query: String) async throws -> [Breed] {
+    public func searchBreeds(query: String) async throws -> [Breed] {
         do {
             let url = configuration.breedSearchURL(query: query)
             let request = NetworkRequest(method: .get, url: url)
@@ -70,7 +70,7 @@ final class BreedRepositoryImpl: BreedRepository {
         }
     }
 
-    func getBreedDetail(id: String) async throws -> Breed {
+    public func getBreedDetail(id: String) async throws -> Breed {
         do {
             let url = configuration.breedDetailURL(id: id)
             let request = NetworkRequest(method: .get, url: url)
@@ -92,11 +92,11 @@ final class BreedRepositoryImpl: BreedRepository {
         }
     }
 
-    func setFavorite(breedId: String, isFavorite: Bool) async throws {
+    public func setFavorite(breedId: String, isFavorite: Bool) async throws {
         try await localStorage.setFavorite(breedId: breedId, isFavorite: isFavorite)
     }
 
-    func getFavoriteBreeds() async throws -> [Breed] {
+    public func getFavoriteBreeds() async throws -> [Breed] {
         let favoriteBreeds = try await localStorage.getFavoriteBreeds()
         return favoriteBreeds.map(mapLocalBreedToDomain)
     }

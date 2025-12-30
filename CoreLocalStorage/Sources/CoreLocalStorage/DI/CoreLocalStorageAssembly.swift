@@ -10,7 +10,7 @@ import Swinject
 public final class CoreLocalStorageAssembly: Assembly {
 
     public init() {}
-    
+
     public func assemble(container: Container) {
         container.register(ModelContainer.self) { resolver in
             let schema = Schema([
@@ -18,9 +18,7 @@ public final class CoreLocalStorageAssembly: Assembly {
             ])
 
             let modelConfiguration = ModelConfiguration(
-                schema: schema,
-                isStoredInMemoryOnly: false,
-                allowsSave: true
+                schema: schema
             )
 
             return try! ModelContainer(

@@ -13,14 +13,30 @@
 		0E6BB1402F02D72200A43E26 /* FeatureFavourites in Frameworks */ = {isa = PBXBuildFile; productRef = 0E6BB13F2F02D72200A43E26 /* FeatureFavourites */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0EA36B202F0465F50066685F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E6BB0F72EFEDD4500A43E26 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E6BB0FE2EFEDD4500A43E26;
+			remoteInfo = Cats;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0E6BB0FF2EFEDD4500A43E26 /* Cats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cats.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EA36B1A2F0465F50066685F /* CatsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0E6BB1012EFEDD4500A43E26 /* Cats */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Cats;
+			sourceTree = "<group>";
+		};
+		0EA36B1B2F0465F50066685F /* CatsUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CatsUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -37,6 +53,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0EA36B172F0465F50066685F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -44,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				0E6BB1012EFEDD4500A43E26 /* Cats */,
+				0EA36B1B2F0465F50066685F /* CatsUITests */,
 				0E6BB1002EFEDD4500A43E26 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				0E6BB0FF2EFEDD4500A43E26 /* Cats.app */,
+				0EA36B1A2F0465F50066685F /* CatsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,6 +110,29 @@
 			productReference = 0E6BB0FF2EFEDD4500A43E26 /* Cats.app */;
 			productType = "com.apple.product-type.application";
 		};
+		0EA36B192F0465F50066685F /* CatsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0EA36B242F0465F50066685F /* Build configuration list for PBXNativeTarget "CatsUITests" */;
+			buildPhases = (
+				0EA36B162F0465F50066685F /* Sources */,
+				0EA36B172F0465F50066685F /* Frameworks */,
+				0EA36B182F0465F50066685F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0EA36B212F0465F50066685F /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				0EA36B1B2F0465F50066685F /* CatsUITests */,
+			);
+			name = CatsUITests;
+			packageProductDependencies = (
+			);
+			productName = CatsUITests;
+			productReference = 0EA36B1A2F0465F50066685F /* CatsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -97,6 +145,10 @@
 				TargetAttributes = {
 					0E6BB0FE2EFEDD4500A43E26 = {
 						CreatedOnToolsVersion = 26.0.1;
+					};
+					0EA36B192F0465F50066685F = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = 0E6BB0FE2EFEDD4500A43E26;
 					};
 				};
 			};
@@ -121,12 +173,20 @@
 			projectRoot = "";
 			targets = (
 				0E6BB0FE2EFEDD4500A43E26 /* Cats */,
+				0EA36B192F0465F50066685F /* CatsUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0E6BB0FD2EFEDD4500A43E26 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0EA36B182F0465F50066685F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -143,7 +203,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0EA36B162F0465F50066685F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0EA36B212F0465F50066685F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E6BB0FE2EFEDD4500A43E26 /* Cats */;
+			targetProxy = 0EA36B202F0465F50066685F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		0E6BB1082EFEDD4700A43E26 /* Debug */ = {
@@ -343,6 +418,56 @@
 			};
 			name = Release;
 		};
+		0EA36B222F0465F50066685F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AAWMBJF5PF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.filipepereira.CatsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Cats;
+			};
+			name = Debug;
+		};
+		0EA36B232F0465F50066685F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AAWMBJF5PF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.filipepereira.CatsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Cats;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -360,6 +485,15 @@
 			buildConfigurations = (
 				0E6BB10B2EFEDD4700A43E26 /* Debug */,
 				0E6BB10C2EFEDD4700A43E26 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0EA36B242F0465F50066685F /* Build configuration list for PBXNativeTarget "CatsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0EA36B222F0465F50066685F /* Debug */,
+				0EA36B232F0465F50066685F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

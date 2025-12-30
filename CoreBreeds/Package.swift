@@ -16,7 +16,8 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/Swinject/Swinject.git", from: "2.10.0"),
         .package(path: "../Network"),
-        .package(path: "../CoreLocalStorage")
+        .package(path: "../CoreLocalStorage"),
+        .package(path: "../CoreTests")
     ],
     targets: [
         .target(
@@ -26,6 +27,10 @@ let package = Package(
                 "Network",
                 "CoreLocalStorage"
             ]
+        ),
+        .testTarget(
+            name: "CoreBreedsTests",
+            dependencies: ["CoreBreeds", "Network", "CoreLocalStorage", "CoreTests"]
         )
     ]
 )

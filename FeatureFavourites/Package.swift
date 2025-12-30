@@ -28,6 +28,10 @@ let package = Package(
                 "CoreBreeds",
                 "CoreResources"
             ]
+        ),
+        .testTarget(
+            name: "FeatureFavouritesTests",
+            dependencies: ["FeatureFavourites", "CoreBreeds", "CoreResources"]
         )
     ]
 )
